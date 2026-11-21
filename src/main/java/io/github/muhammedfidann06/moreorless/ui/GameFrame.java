@@ -87,6 +87,11 @@ public class GameFrame extends JFrame {
         gameMenu.add(item("Neues Spiel", () -> newGame(new Board(size, random),
                 GameSettings.fromDifficulty(difficulty, size, random))));
         gameMenu.add(item("Neustart (gleiches Feld)", this::restart));
+        JMenuItem undo = item("Rückgängig", this::undo);
+        // Strg+Z wie in jedem Programm
+        undo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z,
+                java.awt.Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
+        gameMenu.add(undo);
         gameMenu.addSeparator();
         gameMenu.add(item("Feld speichern …", this::saveBoard));
         gameMenu.add(item("Feld laden …", this::loadBoard));
@@ -143,6 +148,13 @@ public class GameFrame extends JFrame {
     private void restart() {
         game.board().resetUsed();
         newGame(game.board(), game.settings());
+    }
+
+    private void undo() {
+        if (game.canUndo()) {
+            game.undo();
+            updateView();
+        }
     }
 
     private void onSelect(Position p) {

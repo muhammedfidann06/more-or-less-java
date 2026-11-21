@@ -66,6 +66,11 @@ public class Board {
         used[p.row() - 1][p.col() - 1] = true;
     }
 
+    /** Für "Rückgängig": Knopf wieder aktiv machen. */
+    public void markUnused(Position p) {
+        used[p.row() - 1][p.col() - 1] = false;
+    }
+
     public boolean contains(Position p) {
         return p.row() <= size && p.col() <= size;
     }

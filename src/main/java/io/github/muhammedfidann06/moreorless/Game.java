@@ -28,6 +28,9 @@ public class Game {
     private int sum;
     private int movesLeft;
     private final List<Position> history = new ArrayList<>();
+    // Für "Rückgängig": der Wert von Previous VOR jedem Zug.
+    // (Current vor dem Zug ist einfach Previous nach dem Zug.)
+    private final java.util.Deque<OptionalInt> previousBefore = new java.util.ArrayDeque<>();
 
     public Game(Board board, GameSettings settings) {
         if (board.size() != settings.size()) {
@@ -79,12 +82,31 @@ public class Game {
             throw new IllegalStateException("Dieser Zug ist nicht erlaubt: " + p);
         }
         int value = board.digitAt(p);
+        previousBefore.push(previous);
         previous = current;
         current = OptionalInt.of(value);
         sum += value;
         movesLeft--;
         board.markUsed(p);
         history.add(p);
+    }
+
+    /** Gibt es einen Zug, den man rückgängig machen kann? */
+    public boolean canUndo() {
+        return !history.isEmpty();
+    }
+
+    /** Den letzten Zug zurücknehmen: Summe, Züge, Previous/Current und der Knopf. */
+    public void undo() {
+        if (!canUndo()) {
+            throw new IllegalStateException("Es gibt keinen Zug zum Zurücknehmen");
+        }
+        Position last = history.remove(history.size() - 1);
+        sum -= current.getAsInt();
+        movesLeft++;
+        current = previous;
+        previous = previousBefore.pop();
+        board.markUnused(last);
     }
 
     /** Spiel vorbei, wenn keine Züge mehr übrig sind. */

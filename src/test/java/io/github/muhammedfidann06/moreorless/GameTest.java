@@ -76,6 +76,24 @@ class GameTest {
     }
 
     @Test
+    void rueckgaengigStelltAllesWiederHer() {
+        game.select(new Position(1, 1)); // 1
+        game.select(new Position(3, 3)); // 2
+        game.undo();
+        assertEquals(1, game.sum());
+        assertEquals(2, game.movesLeft());
+        assertTrue(game.previous().isEmpty());
+        assertEquals(1, game.current().getAsInt());
+        assertFalse(game.board().isUsed(new Position(3, 3)));
+        assertTrue(game.isAllowed(new Position(3, 3)));
+        game.undo();
+        assertEquals(0, game.sum());
+        assertTrue(game.current().isEmpty());
+        assertFalse(game.canUndo());
+        assertThrows(IllegalStateException.class, game::undo);
+    }
+
+    @Test
     void verbotenerZugWirftException() {
         game.select(new Position(1, 3)); // Current = 3
         assertThrows(IllegalStateException.class, () -> game.select(new Position(1, 1)));

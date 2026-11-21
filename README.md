@@ -25,6 +25,7 @@ When no moves are left, the game shows how far you are from the target. **Goal:*
 | Detects when there is no possible move left | ✅ |
 | Hover preview: shows the new sum before you click | ✅ |
 | Move suggestion (look-ahead heuristic) | ✅ |
+| Undo the last move (menu or Ctrl+Z) | ✅ |
 
 ## Design
 ```

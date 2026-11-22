@@ -50,3 +50,8 @@ java -jar target/more-or-less-1.0.0.jar # start the game
 ## Kurzbeschreibung (Deutsch)
 Ein Zahlenspiel mit Java und Swing. Man wählt Knöpfe mit Ziffern und versucht, mit der Summe genau den Zielwert zu treffen.
 Die Spiellogik ist von der Oberfläche getrennt und mit JUnit getestet. Felder kann man speichern und laden.
+
+## How this was built
+This project was created with the help of an AI coding assistant (Claude). I'm learning to program and use it to understand
+how the code works – the tests and the CI pipeline show that it runs correctly.
+*Dieses Projekt ist mit Hilfe eines KI-Assistenten entstanden; ich nutze es, um Programmieren zu lernen.*

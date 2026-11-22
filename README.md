@@ -2,6 +2,10 @@
 
 [![ci](https://github.com/muhammedfidann06/more-or-less-java/actions/workflows/ci.yml/badge.svg)](https://github.com/muhammedfidann06/more-or-less-java/actions/workflows/ci.yml)
 
+**▶ Play it in the browser:** https://muhammedfidann06.github.io/more-or-less-java/ – a web version with the same rules as `Game.java`
+(hint, undo, hover preview, three difficulty levels). The desktop version (Java + Swing) is available as
+[`more-or-less.jar`](https://muhammedfidann06.github.io/more-or-less-java/more-or-less.jar) (`java -jar more-or-less.jar`, Java 21).
+
 A number puzzle game in **Java 21 + Swing**, written with clean object-oriented design and unit tests (JUnit 5, Maven).
 
 ## Rules
